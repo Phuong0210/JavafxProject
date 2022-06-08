@@ -29,9 +29,9 @@ public class DBconnection {
                 System.out.println("id: " + result.getInt("id"));
                 System.out.println("name: " + result.getString("name"));
                 System.out.println("image_link: " + result.getString("image_link"));
+                System.out.println("price: " + result.getFloat("price"));
                 System.out.println("size: " + result.getString("size"));
                 System.out.println("color: " + result.getString("color"));
-                System.out.println("price: " + result.getFloat("price"));
                 System.out.println("quantity: " + result.getInt("quantity"));
                 Products product = new Products(result.getInt("id"),result.getString("name"), result.getString("image_link"), result.getFloat("price"), result.getString("size"), result.getString("color"), result.getInt("quantity"));
                 list.add(product);
@@ -43,7 +43,7 @@ public class DBconnection {
         }
     }
     public void insertProducts(Products st){
-        String sql = "INSERT INTO product (name, image_link, size, color, price, quantity) VALUE ('"+st.name+"','"+st.image_link+"','"+st.size+"','"+st.color+"',"+st.price+","+st.quantity+")";
+        String sql = "INSERT INTO product (name, image_link,price, size, color,  quantity) VALUE ('"+st.name+"','"+st.image_link+"',"+st.price+",'"+st.size+"','"+st.color+"',"+st.quantity+")";
         System.out.println(sql);
         try {
             con.prepareStatement(sql).executeUpdate();
@@ -54,7 +54,7 @@ public class DBconnection {
     }
 
     public void updateProducts(Products st) {
-        String sql = "UPDATE product SET name ='" + st.name + "', image_link ='" + st.image_link + "', size='" + st.size + "',color='" + st.color + "', price=" + st.price + ", quantity=" + st.quantity + " WHERE id = " + st.id;
+        String sql = "UPDATE product SET name ='" + st.name + "', image_link ='" + st.image_link + "',price=" + st.price + ", size='" + st.size + "',color='" + st.color + "',  quantity=" + st.quantity + " WHERE id = " + st.id;
         System.out.println(sql);
 
         try {

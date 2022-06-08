@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -117,7 +119,10 @@ public class HelloApplication extends Application {
     void addProduct(VBox vBox, DBconnection conn) {
         //Label category = new Label("catego_id");
         Label name = new Label("name");
-        Label image = new Label("image_link");
+        Image image;
+        image = new Image("image_link");
+        ImageView imageView=new ImageView();
+        imageView.setImage(image);
         Label price = new Label("price");
         Label sizep = new Label("size");
         Label colorp = new Label("color");
@@ -134,7 +139,7 @@ public class HelloApplication extends Application {
         HBox hBoxName = new HBox();
         hBoxName.getChildren().addAll(new Node[]{name, textName});
         HBox hBoxImage = new HBox();
-        hBoxImage.getChildren().addAll(new Node[]{image, textImage});
+        hBoxImage.getChildren().addAll(imageView,textImage);
         HBox hBoxPrice = new HBox();
         hBoxPrice.getChildren().addAll(new Node[]{price, textPrice});
         HBox hBoxSize = new HBox();
@@ -148,18 +153,13 @@ public class HelloApplication extends Application {
         btnAdd.setOnAction((e) -> {
             //int txtCate = parseInt(textCatego.getText());
             String txtName = textName.getText();
-            System.out.println(txtName);
             String txtImage = textImage.getText();
-            System.out.println(txtImage);
-            Float ftPrice = Float.parseFloat(textPrice.getText());
-            System.out.println(textPrice);
+            float ftPrice = Float.parseFloat(textPrice.getText());
             String txtSize = textSize.getText();
-            System.out.println(txtSize);
             String txtColor = textColor.getText();
-            System.out.println(txtColor);
             int txtQuantity = parseInt(textQuantity.getText());
             System.out.println(txtQuantity);
-            conn.insertProducts(new Products(txtName, txtImage, ftPrice, txtSize, txtColor, txtQuantity));
+            conn.insertProducts(new Products(txtName, txtImage, txtSize, txtColor, ftPrice, txtQuantity));
             System.out.println(conn);
             vBox.getChildren().removeAll(vBox.getChildren());
             this.getThemdisplayProducts(vBox, conn);
