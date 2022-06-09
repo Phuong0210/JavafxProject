@@ -1,172 +1,132 @@
 package com.example.shopvaycuoi;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import com.example.shopvaycuoi.data.DBconnection;
 import com.example.shopvaycuoi.model.Products;
-import java.io.IOException;
-import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import static java.lang.Integer.parseInt;
-
+/**
+ *
+ * @author admin
+ */
 public class HelloApplication extends Application {
-    public void start(Stage stage) throws IOException {
-        DBconnection conn = new DBconnection();
-        VBox vBox = new VBox();
-        this.getThemdisplayProducts(vBox, conn);
-        Scene scene = new Scene(vBox, 1200.0, 600.0);
-        stage.setTitle("Shop váy cưới!");
+
+
+    Button button;
+    public static void main(String[] args) {
+        launch(args);
+    }
+    private Scene scene;
+    @Override
+    public void start(Stage stage) {
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setVgap(10);
+        grid.setHgap(10);
+        DBconnection DB = new DBconnection();
+
+        stage.setTitle("Alert");
+        button = new Button();
+        button.setText("Wellcome to Lyly@Shop");
+        button.setOnAction(e->{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Bạn có chắc chắn muốn khám phá cửa mình không ạ?");
+            alert.setContentText("Choose your option");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+            ButtonType buttonTypeCancel = new ButtonType( "Cancel", ButtonBar. ButtonData. CANCEL_CLOSE);
+            alert.getButtonTypes (). setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+
+
+            if (result.get() == buttonTypeYes)
+            getDisplayProducts(grid,DB, stage);
+            else if (result.get().getButtonData() == ButtonBar.ButtonData.NO)
+                System.out.println("NOOOOOOOOOOOOOOOOOOOOOO");
+            else
+                System.out.println("CANCELLLLLLLLLLLLL");
+
+            String message = result.get().getText();
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("Information");
+            alert1.setHeaderText("Cảm ơn bạn đã ghé cửa hàng nhà Lyly");
+            alert1.setContentText(message);
+            alert1.show();
+        });
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button);
+        Scene scene = new Scene(layout, 300, 250);
         stage.setScene(scene);
         stage.show();
-    }
-    void getThemdisplayProducts(VBox vBox, DBconnection conn) {
-        ArrayList<Products> productList = conn.getProducts();
-
-
-        for(int i = 0; i < productList.size(); ++i) {
-            HBox hBoxStudents = new HBox();
-            hBoxStudents.setSpacing(20.0);
-            Button btnDelete = new Button("DELETE");
-            btnDelete.setId(String.valueOf(((Products)productList.get(i)).id));
-            btnDelete.setOnAction((e) -> {
-                conn.deleteProducts(parseInt(btnDelete.getId()));
-                vBox.getChildren().removeAll(vBox.getChildren());
-                this.getThemdisplayProducts(vBox, conn);
-            });
-            Button btnEdit = new Button("EDIT");
-            btnEdit.setId(String.valueOf(((Products)productList.get(i)).id));
-            int finalI = i;
-            btnEdit.setOnAction((e) -> {
-                vBox.getChildren().removeAll(vBox.getChildren());
-                Label name = new Label("name");
-                Label image = new Label("image_link");
-                Label price = new Label("price");
-                Label sizep = new Label("size");
-                Label colorp = new Label("color");
-                Label quantity = new Label("quantity");
-                TextField textName = new TextField();
-                TextField textImage = new TextField();
-                TextField textPrice = new TextField();
-                TextField textSize = new TextField();
-                TextField textColor = new TextField();
-                TextField textQuantity = new TextField();
-                textName.setText(((Products)productList.get(finalI)).name);
-                textImage.setText(((Products)productList.get(finalI)).image_link);
-                textPrice.setText(String.valueOf(((Products)productList.get(finalI)).price));
-                textSize.setText(((Products)productList.get(finalI)).size);
-                textColor.setText(((Products)productList.get(finalI)).color);
-                textQuantity.setText(String.valueOf(((Products)productList.get(finalI)).quantity));
-                HBox hBoxName = new HBox();
-                hBoxName.getChildren().addAll(new Node[]{name, textName});
-                HBox hBoxImage = new HBox();
-                hBoxImage.getChildren().addAll(new Node[]{image, textImage});
-                HBox hBoxPrice = new HBox();
-                hBoxPrice.getChildren().addAll(new Node[]{price, textPrice});
-                HBox hBoxSize = new HBox();
-                hBoxSize.getChildren().addAll(new Node[]{sizep, textSize});
-                HBox hBoxColor = new HBox();
-                hBoxColor.getChildren().addAll(new Node[]{colorp, textColor});
-                HBox hBoxQuantity = new HBox();
-                hBoxQuantity.getChildren().addAll(new Node[]{quantity, textQuantity});
-                Button btnAdd = new Button("SAVE");
-                btnAdd.setOnAction((a) -> {
-                    this.saveEditProduct(textName, textImage, textPrice, textSize, textColor, textQuantity, ((Products)productList.get(finalI)).id, conn, vBox);
-                });
-                vBox.getChildren().addAll(new Node[]{hBoxName,hBoxImage, hBoxPrice,hBoxSize,hBoxColor,hBoxQuantity, btnAdd});
-                this.getThemdisplayProducts(vBox, conn);
-            });
-            Object var10002 = productList.get(i);
-            Label id = new Label("" + ((Products)var10002).id);
-            var10002 = productList.get(i);
-            Label name = new Label("" + ((Products)var10002).name);
-            var10002 = productList.get(i);
-            Label image_link = new Label("" + ((Products)var10002).image_link);
-            var10002 = productList.get(i);
-            Label price = new Label("" + ((Products)var10002).price);
-            var10002 = productList.get(i);
-            Label size = new Label("" + ((Products)var10002).size);
-            var10002 = productList.get(i);
-            Label color = new Label("" + ((Products)var10002).color);
-            var10002 = productList.get(i);
-            Label quantity = new Label("" + ((Products)var10002).quantity);
-            hBoxStudents.getChildren().addAll(new Node[]{id, name,image_link, price, size, color, quantity, btnDelete, btnEdit});
-            vBox.getChildren().add(hBoxStudents);
-        }
-        this.addProduct(vBox, conn);
-    }
-
-    void saveEditProduct( TextField textName, TextField textImage_link, TextField textPrice, TextField textSize, TextField textColor, TextField textQuantity, int id, DBconnection conn, VBox vBox) {
-        String editName = textName.getText();
-        String editImage = textImage_link.getText();
-        Float editPrice = Float.valueOf(textPrice.getText());
-        String editSize = textSize.getText();
-        String editColor = textColor.getText();
-        int editQuantity = parseInt(textQuantity.getText());
-        conn.updateProducts(new Products(id, editName, editImage, editPrice, editSize, editColor, editQuantity));
-        vBox.getChildren().removeAll(vBox.getChildren());
-        this.getThemdisplayProducts(vBox, conn);
-    }
-
-    void addProduct(VBox vBox, DBconnection conn) {
-        //Label category = new Label("catego_id");
-        Label name = new Label("name");
-        Image image;
-        image = new Image("image_link");
-        ImageView imageView=new ImageView();
-        imageView.setImage(image);
-        Label price = new Label("price");
-        Label sizep = new Label("size");
-        Label colorp = new Label("color");
-        Label quantity = new Label("quantity");
-        //TextField textCatego = new TextField();
-        TextField textName = new TextField();
-        TextField textImage = new TextField();
-        TextField textPrice = new TextField();
-        TextField textSize = new TextField();
-        TextField textColor = new TextField();
-        TextField textQuantity = new TextField();
-//        HBox hBoxCategory = new HBox();
-//        hBoxCategory.getChildren().addAll(new Node[]{category, textCatego});
-        HBox hBoxName = new HBox();
-        hBoxName.getChildren().addAll(new Node[]{name, textName});
-        HBox hBoxImage = new HBox();
-        hBoxImage.getChildren().addAll(imageView,textImage);
-        HBox hBoxPrice = new HBox();
-        hBoxPrice.getChildren().addAll(new Node[]{price, textPrice});
-        HBox hBoxSize = new HBox();
-        hBoxSize.getChildren().addAll(new Node[]{sizep, textSize});
-        HBox hBoxColor = new HBox();
-        hBoxColor.getChildren().addAll(new Node[]{colorp, textColor});
-        HBox hBoxQuantity = new HBox();
-        hBoxQuantity.getChildren().addAll(new Node[]{quantity, textQuantity});
-        Button btnAdd = new Button("ADD Products");
-        vBox.getChildren().addAll(new Node[]{hBoxName, hBoxImage, hBoxPrice, hBoxSize, hBoxColor, hBoxQuantity, btnAdd});
-        btnAdd.setOnAction((e) -> {
-            //int txtCate = parseInt(textCatego.getText());
-            String txtName = textName.getText();
-            String txtImage = textImage.getText();
-            float ftPrice = Float.parseFloat(textPrice.getText());
-            String txtSize = textSize.getText();
-            String txtColor = textColor.getText();
-            int txtQuantity = parseInt(textQuantity.getText());
-            System.out.println(txtQuantity);
-            conn.insertProducts(new Products(txtName, txtImage, txtSize, txtColor, ftPrice, txtQuantity));
-            System.out.println(conn);
-            vBox.getChildren().removeAll(vBox.getChildren());
-            this.getThemdisplayProducts(vBox, conn);
-        });
 
     }
-    public static void main(String[] args) {
-        launch(new String[0]);
-    }
-}
+
+
+//Hiện thị các sản phẩm
+
+    private void getDisplayProducts(GridPane grid, DBconnection DB, Stage stage) {
+
+        grid.add(new Label("Name"), 1, 0);
+
+        //
+        grid.add(new Label("Image"), 3, 0);
+
+        //
+        grid.add(new Label("Price"), 5, 0);
+
+        //
+        grid.add(new Label("Size"),7,  0);
+
+        //
+        grid.add(new Label("Color"),9,  0);
+
+        //
+        grid.add(new Label("Quantity"),11,  0);
+
+        ArrayList<Products> productsList = DB.getProducts();
+
+        for(int i = 0; i < productsList.size(); i++) {
+
+            Image image = new Image(productsList.get(i).getImage());
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            imageView.setFitWidth(110);
+            imageView.setFitHeight(110);
+
+            grid.add(new Label(productsList.get(i).getName()), 1, i + 2);
+            grid.add(imageView, 3, i + 2);
+            grid.add(new Label(String.valueOf(productsList.get(i).getPrice() + "VND")), 5, i + 2);
+            grid.add(new Label(productsList.get(i).getSize()), 7, i + 2);
+            grid.add(new Label(productsList.get(i).getColor()), 9, i + 2);
+            grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 11, i + 2);
+
+
+        var alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        //alert.setContentText("Bạn phải điền đầy đủ thông tin");
+        alert.showAndWait();
+
+    };
+
+
+    scene = new Scene(grid, 900, 600);
+        stage.setTitle("Shop váy cưới");
+        stage.setScene(scene);
+        stage.show();
+}}

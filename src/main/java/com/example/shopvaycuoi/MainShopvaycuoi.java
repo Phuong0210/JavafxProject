@@ -24,16 +24,15 @@ public class MainShopvaycuoi extends Application {
 
     @Override
     public void start(Stage stage) {
+
+
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
         grid.setHgap(10);
         DBconnection DB = new DBconnection();
         ArrayList<Products> productsList = DB.getProducts();
-//        DB.insertStudent(new Student("LyLy",8));
-//        DB.updateStudent(new Student(2,"Olaha",6));
-//        DB.deleteStudent(1);
-//        DB.getStudents();
+
 
         grid.add(new Label("Name:"), 0, 0);
         var tfName = new TextField();
@@ -58,7 +57,11 @@ public class MainShopvaycuoi extends Application {
         grid.add(new Label("Quantity:"),5,  0);
         var tfQuantity= new TextField();
         grid.add(tfQuantity, 5, 1);
-        // add
+//
+        grid.add(new Label("Catego_id:"),6,  0);
+        var tfcatego_id= new TextField();
+        grid.add(tfcatego_id, 6, 1);
+        // Thêm các sản phẩm mới
         var btnAdd = new Button("Add");
         btnAdd.setPadding(new Insets(5, 15, 5, 15));
         btnAdd.setOnAction(e -> {
@@ -68,8 +71,9 @@ public class MainShopvaycuoi extends Application {
             String size = tfSize.getText();
             String color = tfColor.getText();
             Integer quantity = Integer.valueOf(tfQuantity.getText());
-            if (!name.equals(EMPTY) && !image_link.equals(EMPTY) && !Objects.equals(price, EMPTY) && !size.equals(EMPTY) && !color.equals(EMPTY) && !quantity.equals(EMPTY) ){
-                DB.insertProducts(new Products(name, image_link, price,size,color,quantity));
+            Integer catego_id = Integer.valueOf(tfcatego_id.getText());
+            if (!name.equals(EMPTY) && !image_link.equals(EMPTY) && !Objects.equals(price, EMPTY) && !size.equals(EMPTY) && !color.equals(EMPTY) && !quantity.equals(EMPTY) && !catego_id.equals(EMPTY) ){
+                DB.insertProducts(new Products(name, image_link, price,size,color,quantity,catego_id));
                 try {
                     start(stage);
                 } catch (Exception ex) {
@@ -79,27 +83,17 @@ public class MainShopvaycuoi extends Application {
             }
             var alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
-            alert.setContentText("Please fill all blank!");
+            alert.setContentText("Bạn phải điền đầy đủ thông tin");
             alert.showAndWait();
         });
-        grid.add(btnAdd, 6, 1);
+        grid.add(btnAdd, 7, 1);
 
-        //show
-        for(int i = 0; i < productsList.size(); i++){
+        //Hiện thị các sản phẩm
 
-            Image image = new Image(productsList.get(i).getImage());
-            ImageView imageView = new ImageView();
-            imageView.setImage(image);
-            imageView.setFitWidth(110);
-            imageView.setFitHeight(110);
+            for(int i = 0; i < productsList.size(); i++) {
 
-            grid.add(new Label (productsList.get(i).getName()), 0, i+2);
-            grid.add(imageView, 1, i+2);
-            grid.add(new Label (String.valueOf(productsList.get(i).getPrice()+"VND")), 2, i+2);
-            grid.add(new Label (productsList.get(i).getSize()), 3, i+2);
-            grid.add(new Label (productsList.get(i).getColor()), 4, i+2);
-            grid.add(new Label (String.valueOf(productsList.get(i).getQuantity())), 5, i+2);
-            // Update
+
+            // Cập nhật sản phẩm đã có trong của hàng( sửa lại thông tin sp)
             var btnUpdate = new Button("Update");
             btnUpdate.setId(String.valueOf(i));
             btnUpdate.setOnAction(e -> {
@@ -117,6 +111,8 @@ public class MainShopvaycuoi extends Application {
                 tfcolor.setText("" + productsList.get(id1).getColor());
                 TextField tfquantity = (TextField) grid.getChildren().get(11);
                 tfquantity.setText("" + productsList.get(id1).getQuantity());
+                TextField tfcatego = (TextField) grid.getChildren().get(13);
+                tfcatego.setText("" + productsList.get(id1).getCatego_id());
                 var newbtnAdd = new Button("Update");
                 newbtnAdd.setPadding(new Insets(5, 15, 5, 15));
                 newbtnAdd.setOnAction(newe -> {
@@ -127,8 +123,9 @@ public class MainShopvaycuoi extends Application {
                     String size = tfSize.getText();
                     String color = tfcolor.getText();
                     int quantity = Integer.valueOf(tfQuantity.getText());
-                    if (!name.equals(EMPTY) && !image_link.equals(EMPTY) && !Objects.equals(price, EMPTY) && !size.equals(EMPTY) && !color.equals(EMPTY) && !Objects.equals(quantity, EMPTY)) {
-                        DB.updateProducts(new Products(id, name, image_link, price, size, color, quantity));
+                    int catego_id = Integer.valueOf(tfcatego.getText());
+                    if (!name.equals(EMPTY) && !image_link.equals(EMPTY) && !Objects.equals(price, EMPTY) && !size.equals(EMPTY) && !color.equals(EMPTY) && !Objects.equals(quantity, EMPTY) && !Objects.equals(catego_id, EMPTY)) {
+                        DB.updateProducts(new Products(id, name, image_link, price, size, color, quantity, catego_id));
                         try {
                             start(stage);
                         } catch (Exception ex) {
@@ -138,14 +135,14 @@ public class MainShopvaycuoi extends Application {
                     }
                     var alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
-                    alert.setContentText("Please fill all blank!");
+                    alert.setContentText("Bạn phải điền đầy đủ thông tin");
                     alert.showAndWait();
                 });
                 grid.add(newbtnAdd, 6, 1);
             });
             grid.add(btnUpdate, 6, i+2);
 
-            // Delete
+            // Xóa sản phẩm không còn bán
             var btnDelete = new Button("Delete");
             btnDelete.setId(String.valueOf(productsList.get(i).id));
             btnDelete.setOnAction(e -> {

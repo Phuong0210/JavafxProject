@@ -8,8 +8,8 @@ public class Products {
     public String size;
     public String color;
     public int quantity;
-
-    public Products(int id, String name, String image_link, float price, String size, String color, int quantity) {
+    public int catego_id;
+    public Products(int id, String name, String image_link, float price, String size, String color, int quantity, int catego_id) {
         this.id = id;
         this.name = name;
         this.image_link = image_link;
@@ -17,34 +17,52 @@ public class Products {
         this.size = size;
         this.color = color;
         this.quantity = quantity;
+        this.catego_id = catego_id;
     }
-
-
-    public Products(String name, String image_link, String size, String color, float price, int quantity) {
+    public Products(String name, String image_link, float price, String size, String color, Integer quantity) {
         this.name = name;
-        this.image_link = image_link;
-        this.price = price;
-        this.size = size;
+       this.image_link = image_link;
+       this.price = price;
+       this.size = size;
         this.color = color;
         this.quantity = quantity;
     }
 
-
-    public Products(int id, String name, String image_link, float price) {
+    public Products(Integer id, String name, String image_link, float price, String size, String color, int quantity) {
         this.id=id;
         this.name = name;
         this.image_link = image_link;
         this.price = price;
+        this.size = size;
+        this.color = color;
+        this.quantity = quantity;
     }
 
-    public Products(String name, String image_link, float price, String size, String color, Integer quantity) {
+    public Products(String name, String image_link, float price, String size, String color, Integer quantity, Integer catego_id) {
         this.name = name;
         this.image_link = image_link;
         this.price = price;
         this.size = size;
         this.color = color;
         this.quantity = quantity;
+        this.catego_id=catego_id;
     }
+    //public int catego_id;
+
+//    public Products(int id, String name, String image_link, float price, String size, String color, int quantity,int catego_id) {
+//        this.id = id;
+//        this.name = name;
+//        this.image_link = image_link;
+//        this.price = price;
+//        this.size = size;
+//        this.color = color;
+//        this.quantity = quantity;
+//        this.catego_id=catego_id;
+//    }
+
+
+
+
 
     public int getId() {
         return id;
@@ -96,5 +114,12 @@ public class Products {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public int getCatego_id() {
+        return catego_id;
+    }
+
+    public void setCatego_id(int catego_id) {
+        this.catego_id = catego_id;
     }
 }
