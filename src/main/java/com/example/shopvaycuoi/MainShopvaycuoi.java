@@ -95,7 +95,7 @@ public class MainShopvaycuoi extends Application {
 
             grid.add(new Label (productsList.get(i).getName()), 0, i+2);
             grid.add(imageView, 1, i+2);
-            grid.add(new Label ("$"+String.valueOf(productsList.get(i).getPrice())), 2, i+2);
+            grid.add(new Label (String.valueOf(productsList.get(i).getPrice()+"VND")), 2, i+2);
             grid.add(new Label (productsList.get(i).getSize()), 3, i+2);
             grid.add(new Label (productsList.get(i).getColor()), 4, i+2);
             grid.add(new Label (String.valueOf(productsList.get(i).getQuantity())), 5, i+2);
