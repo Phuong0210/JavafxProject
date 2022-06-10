@@ -50,13 +50,9 @@ public class HelloApplication extends Application {
             ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
             ButtonType buttonTypeCancel = new ButtonType( "Cancel", ButtonBar. ButtonData. CANCEL_CLOSE);
             alert.getButtonTypes (). setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
-
             Optional<ButtonType> result = alert.showAndWait();
-
-
-
             if (result.get() == buttonTypeYes)
-            getDisplayProducts(grid,DB, stage);
+                getDisplayProducts(grid,DB, stage);
             else if (result.get().getButtonData() == ButtonBar.ButtonData.NO)
                 System.out.println("NOOOOOOOOOOOOOOOOOOOOOO");
             else
@@ -67,7 +63,7 @@ public class HelloApplication extends Application {
             alert1.setTitle("Information");
             alert1.setHeaderText("Cảm ơn bạn đã ghé cửa hàng nhà Lyly");
             alert1.setContentText(message);
-            alert1.show();
+            alert1.showAndWait();
         });
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
@@ -117,10 +113,7 @@ public class HelloApplication extends Application {
             grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 11, i + 2);
 
 
-        var alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        //alert.setContentText("Bạn phải điền đầy đủ thông tin");
-        alert.showAndWait();
+
 
     };
 
