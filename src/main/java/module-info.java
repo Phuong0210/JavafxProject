@@ -6,4 +6,6 @@ module com.example.shopvaycuoi {
 
     opens com.example.shopvaycuoi to javafx.fxml;
     exports com.example.shopvaycuoi;
+    exports com.example.shopvaycuoi.view;
+    opens com.example.shopvaycuoi.view to javafx.fxml;
 }

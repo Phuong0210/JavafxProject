@@ -1,4 +1,4 @@
-package com.example.shopvaycuoi;
+package com.example.shopvaycuoi.view;
 
 import com.example.shopvaycuoi.data.DBconnection;
 import com.example.shopvaycuoi.model.Products;
@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Objects;
-public class MainShopvaycuoi extends Application {
+public class Home extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -90,7 +90,22 @@ public class MainShopvaycuoi extends Application {
 
         //Hiện thị các sản phẩm
 
+
             for(int i = 0; i < productsList.size(); i++) {
+
+                Image image = new Image(productsList.get(i).getImage());
+                ImageView imageView = new ImageView();
+                imageView.setImage(image);
+                imageView.setFitWidth(110);
+                imageView.setFitHeight(110);
+
+                grid.add(new Label(productsList.get(i).getName()), 0, i + 2);
+                grid.add(imageView, 1, i + 2);
+                grid.add(new Label(String.valueOf(productsList.get(i).getPrice() + "VND")), 2, i + 2);
+                grid.add(new Label(productsList.get(i).getSize()), 3, i + 2);
+                grid.add(new Label(productsList.get(i).getColor()), 4, i + 2);
+                grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 5, i + 2);
+                grid.add(new Label(String.valueOf(productsList.get(i).getCatego_id())), 6, i + 2);
 
 
             // Cập nhật sản phẩm đã có trong của hàng( sửa lại thông tin sp)
@@ -138,9 +153,9 @@ public class MainShopvaycuoi extends Application {
                     alert.setContentText("Bạn phải điền đầy đủ thông tin");
                     alert.showAndWait();
                 });
-                grid.add(newbtnAdd, 6, 1);
+                grid.add(newbtnAdd, 7, 1);
             });
-            grid.add(btnUpdate, 6, i+2);
+            grid.add(btnUpdate, 7, i+2);
 
             // Xóa sản phẩm không còn bán
             var btnDelete = new Button("Delete");
@@ -158,10 +173,10 @@ public class MainShopvaycuoi extends Application {
                     throw new RuntimeException(ex);
                 }
             });
-            grid.add(btnDelete, 7, i+2);
+            grid.add(btnDelete, 8, i+2);
         }
 
-        scene = new Scene(grid, 1200, 600);
+        scene = new Scene(grid, 1250, 600);
         stage.setTitle("Shop váy cưới");
         stage.setScene(scene);
         stage.show();
