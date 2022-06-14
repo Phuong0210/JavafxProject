@@ -7,8 +7,6 @@ import java.util.Optional;
 import com.example.shopvaycuoi.data.DBconnection;
 import com.example.shopvaycuoi.model.Products;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -49,7 +46,7 @@ public class Admin extends Application {
         button.setOnAction(e->{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Bạn có chắc chắn muốn khám phá cửa mình không ạ?");
+            alert.setHeaderText("Xin chào Admin yêu dấu của Lyly shop");
             alert.setContentText("Choose your option");
 
             ButtonType buttonTypeYes = new ButtonType("All products", ButtonBar.ButtonData.YES);
@@ -67,7 +64,7 @@ public class Admin extends Application {
             String message = result.get().getText();
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Information");
-            alert1.setHeaderText("Cảm ơn bạn đã ghé cửa hàng nhà Lyly");
+            alert1.setHeaderText("Tạm biệt Lyly");
             alert1.setContentText(message);
             alert1.showAndWait();
         });
