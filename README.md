@@ -10,6 +10,6 @@ hjhkjk
 5. Functions are doing <br>
   Show products in hompage
 6. Functions intended for the future <br>
- Search for products by name
+ Search for products by name <br>
  Login for admin
 
