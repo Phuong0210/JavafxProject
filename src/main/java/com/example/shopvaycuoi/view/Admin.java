@@ -64,7 +64,7 @@ public class Admin extends Application {
             String message = result.get().getText();
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Information");
-            alert1.setHeaderText("Tạm biệt Lyly");
+            alert1.setHeaderText("Chào mừng Lyly");
             alert1.setContentText(message);
             alert1.showAndWait();
         });
@@ -266,9 +266,9 @@ public class Admin extends Application {
         }
 
 
-        VBox vboxGrid = new VBox();
-       butBacks(stage,grid,vboxGrid);
-        scene = new Scene(vboxGrid, 1250, 600);
+        VBox vboxGrid2 = new VBox();
+       butBacks(stage,grid,vboxGrid2);
+        scene = new Scene(vboxGrid2, 1250, 600);
         stage.setTitle("Shop váy cưới");
         stage.setScene(scene);
         stage.show();
