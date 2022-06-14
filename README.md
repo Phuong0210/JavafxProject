@@ -2,8 +2,7 @@
 1. Stucture of project <br>
  ![image](https://user-images.githubusercontent.com/100773941/173478686-201b05c7-61aa-4b51-b70b-8b256226a53b.png)
 2. Entity Relationship Model of Database <br>
-![image](https://user-images.githubusercontent.com/100773941/173485991-4b116ffa-a7f4-4e18-b223-76a28e45b8a3.png)
-
+![image](https://user-images.githubusercontent.com/100773941/173491190-1e902b66-88bc-4ec4-a7be-9898ec27e06e.png)
 3. Link video demo <br>
 hjhkjk
 4. Completed functions of the project <br>
