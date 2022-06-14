@@ -17,4 +17,4 @@ hjhkjk
 
 ![image](https://user-images.githubusercontent.com/100773941/173493085-1f46a41a-6ffb-446e-83ed-f8ba9cdaba39.png)
 
-I'm glad I was able to do so, even though it wasn't really that good.
+I'm glad I was able to do so, even though it wasn't really good.
