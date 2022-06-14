@@ -7,6 +7,8 @@ import java.util.Optional;
 import com.example.shopvaycuoi.data.DBconnection;
 import com.example.shopvaycuoi.model.Products;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -28,7 +32,7 @@ public class Admin extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    private Scene scene;
+    private Scene scene,admin;
     private static final String EMPTY = "";
     @Override
     public void start(Stage stage) {
@@ -69,12 +73,12 @@ public class Admin extends Application {
         });
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 300, 250);
-        stage.setScene(scene);
+        admin = new Scene(layout, 300, 250);
+        stage.setScene(admin);
         stage.show();
 
     }
-
+//Hiện thị tất cả sản phẩm đang có
     private void getDisplayProducts(GridPane grid, DBconnection DB, Stage stage) {
 
         grid.add(new Label("Name"), 1, 0);
@@ -112,12 +116,15 @@ public class Admin extends Application {
             grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 11, i + 2);
 
         }
-        scene = new Scene(grid, 900, 600);
+        VBox vboxGrid = new VBox();
+        butBacks(stage,grid,vboxGrid);
+        scene = new Scene(vboxGrid, 900, 600);
         stage.setTitle("Shop váy cưới");
         stage.setScene(scene);
         stage.show();
     }
-    private void handleProducts(GridPane grid, DBconnection DB, Stage stage){
+    //Thực hiện các thao tác thêm, sửa và xóa sản phẩm
+    public void handleProducts(GridPane grid, DBconnection DB, Stage stage) {
         grid.add(new Label("Name:"), 0, 0);
         var tfName = new TextField();
         grid.add(tfName, 0, 1);
@@ -262,11 +269,22 @@ public class Admin extends Application {
         }
 
 
-
-
-        scene = new Scene(grid, 1250, 600);
+        VBox vboxGrid = new VBox();
+       butBacks(stage,grid,vboxGrid);
+        scene = new Scene(vboxGrid, 1250, 600);
         stage.setTitle("Shop váy cưới");
         stage.setScene(scene);
         stage.show();
     }
+    void butBacks(Stage stage, GridPane grid,VBox vboxGrid){
+        Button btnBack = new Button("Back");
+
+        vboxGrid.getChildren().addAll(grid,btnBack);
+
+        btnBack.setOnAction(e -> {
+            stage.setScene(admin);
+            System.out.println("Go back");
+        });
+    }
+
 }
