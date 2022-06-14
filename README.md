@@ -12,4 +12,5 @@ hjhkjk
   Show products in hompage
 6. Functions intended for the future <br>
  Search for products by name
+ Login for admin
 
