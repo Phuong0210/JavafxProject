@@ -29,7 +29,7 @@ public class Admin extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    private Scene scene,admin;
+    private Scene scene,admin, scene1;
     private static final String EMPTY = "";
     @Override
     public void start(Stage stage) {
@@ -77,7 +77,7 @@ public class Admin extends Application {
     }
 //Hiện thị tất cả sản phẩm đang có
     private void getDisplayProducts(GridPane grid, DBconnection DB, Stage stage) {
-
+        grid.getChildren().clear();
         grid.add(new Label("Name"), 1, 0);
 
         //
@@ -122,6 +122,7 @@ public class Admin extends Application {
     }
     //Thực hiện các thao tác thêm, sửa và xóa sản phẩm
     public void handleProducts(GridPane grid, DBconnection DB, Stage stage) {
+        grid.getChildren().clear();
         grid.add(new Label("Name:"), 0, 0);
         var tfName = new TextField();
         grid.add(tfName, 0, 1);
@@ -266,11 +267,11 @@ public class Admin extends Application {
         }
 
 
-        VBox vboxGrid2 = new VBox();
-       butBacks(stage,grid,vboxGrid2);
-        scene = new Scene(vboxGrid2, 1250, 600);
+       VBox vboxGrid2 = new VBox();
+        butBacks(stage,grid,vboxGrid2);
+        scene1 = new Scene(vboxGrid2, 1250, 600);
         stage.setTitle("Shop váy cưới");
-        stage.setScene(scene);
+        stage.setScene(scene1);
         stage.show();
     }
     void butBacks(Stage stage, GridPane grid,VBox vboxGrid){
