@@ -1,5 +1,6 @@
 package com.example.shopvaycuoi.data;
 
+import com.example.shopvaycuoi.model.Admin;
 import com.example.shopvaycuoi.model.Products;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -76,4 +77,25 @@ public class DBconnection {
             throw new RuntimeException(var4);
         }
     }
+
+    public ArrayList<Admin> getAdmin(){
+        ArrayList<Admin> Admin = new ArrayList<>();
+        String sql = "SELECT * FROM admin";
+        try {
+            ResultSet rs = con.prepareStatement(sql).executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString("name"));
+                System.out.println(rs.getString("pass"));
+                Admin ad = new Admin(
+                        rs.getString("name"),
+                        rs.getString("pass")
+                );
+                Admin.add(ad);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Admin;
+    }
+
 }
