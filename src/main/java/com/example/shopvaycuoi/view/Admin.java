@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
+import com.example.shopvaycuoi.Controller.ShopLyly;
 import com.example.shopvaycuoi.data.DBconnection;
 import com.example.shopvaycuoi.model.Products;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -33,6 +35,8 @@ public class Admin extends Application {
     private static final String EMPTY = "";
     @Override
     public void start(Stage stage) {
+        Stage Lyly =new Stage();
+        ShopLyly P = new ShopLyly();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
@@ -51,7 +55,10 @@ public class Admin extends Application {
 
             ButtonType buttonTypeYes = new ButtonType("All products", ButtonBar.ButtonData.YES);
             ButtonType buttonTypeNo = new ButtonType("Action", ButtonBar.ButtonData.NO);
-            ButtonType buttonTypeCancel = new ButtonType( "Cancel", ButtonBar. ButtonData. CANCEL_CLOSE);
+            ButtonType buttonTypeCancel = new ButtonType( "HOME");
+//            buttonTypeCancel.setOnAction(e -> {
+//                stage.setScene(P.renderMainboard(stage,Lyly));
+//            });
             alert.getButtonTypes (). setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == buttonTypeYes)
@@ -59,8 +66,7 @@ public class Admin extends Application {
             else if (result.get().getButtonData() == ButtonBar.ButtonData.NO)
                 handleProducts(grid,DB,stage);
             else
-                System.out.println("CANCELLLLLLLLLLLLL");
-
+                stage.setScene(P.renderMainboard(stage,Lyly));
             String message = result.get().getText();
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Information");

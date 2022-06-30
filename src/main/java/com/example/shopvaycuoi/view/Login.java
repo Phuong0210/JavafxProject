@@ -23,7 +23,7 @@ import static javafx.application.Application.launch;
 
 public class Login extends Application {
     TextField name, pass;
-    public Scene screenLogin,hopages;
+    public Scene screenLogin,homepages;
 
 
     private Scene scene,admin1;
@@ -53,8 +53,8 @@ public class Login extends Application {
         this.getDisplayProducts(grid,DB, stage);;
         vBoxhompage.getChildren().add(grid);
 
-        // WELCOME PHONE SHOP
-        hopages = new Scene(vBoxhompage, 1000, 1000);
+        // WELCOME LYLY SHOP
+        homepages = new Scene(vBoxhompage, 1000, 1000);
 
 
 
@@ -102,7 +102,7 @@ public class Login extends Application {
             System.out.println("success!");
             LoginSuccess();
 
-            stage.setScene(hopages);
+            stage.setScene(homepages);
             //stage.show();
 
         }else{
