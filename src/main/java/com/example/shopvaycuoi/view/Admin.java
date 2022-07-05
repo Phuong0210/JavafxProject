@@ -31,7 +31,7 @@ public class Admin extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    private Scene scene,admin, scene1;
+    public Scene scene,admin, scene1;
     private static final String EMPTY = "";
     @Override
     public void start(Stage stage) {
@@ -112,8 +112,11 @@ public class Admin extends Application {
             imageView.setFitHeight(110);
 
             grid.add(new Label(productsList.get(i).getName()), 1, i + 2);
+            grid.setStyle("-fx-font-size: 13px;-fx-font-weight: bold;" + "-fx-text-fill: #3b5998;" + "-fx-font-family: helvetica, arial, sans-serif");
+            grid.setPrefSize(400, 400);
             grid.add(imageView, 3, i + 2);
             grid.add(new Label(String.valueOf(productsList.get(i).getPrice() + "VND")), 5, i + 2);
+
             grid.add(new Label(productsList.get(i).getSize()), 7, i + 2);
             grid.add(new Label(productsList.get(i).getColor()), 9, i + 2);
             grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 11, i + 2);

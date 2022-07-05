@@ -50,7 +50,7 @@ public class Login extends Application {
 
 //        homepage
         vBoxhompage.setPadding(new Insets(150));
-        this.getDisplayProducts(grid,DB, stage);;
+        this.getDisplayProducts(grid,DB, stage);
         vBoxhompage.getChildren().add(grid);
 
         // WELCOME LYLY SHOP
@@ -68,7 +68,7 @@ public class Login extends Application {
         Label Aname = new Label("Name: ");
         Label Apassword = new Label("Password: ");
         name = new TextField();
-        pass= new TextField();
+        pass = new TextField();
         HBox fieldName = new HBox();
         fieldName.getChildren().addAll(Aname,name);
         fieldName.setSpacing(10);

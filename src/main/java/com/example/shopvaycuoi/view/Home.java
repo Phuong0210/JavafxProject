@@ -19,8 +19,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Home extends Application {
-
+public Scene scene_H;
 private  Stage primaryStage;
+    private javafx.scene.Scene Scene;
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -33,9 +35,10 @@ private  Stage primaryStage;
         launch(args);
     }
 
-    public VBox loadScreenOne(Stage primaryStage)
+    public VBox loadScreenOne(Stage stage)
     {  //vP.getChildren().clear();
         VBox vBox = new VBox();
+        vBox.getChildren().clear();
         vBox.setAlignment(Pos.CENTER);
         final Button button = new Button("Switch Screen");
         button.setOnAction(new EventHandler<ActionEvent>() {
@@ -53,7 +56,9 @@ private  Stage primaryStage;
     }
 
     public VBox loadScreenTwo(Stage primaryStage) {
+
         VBox vBox = new VBox();
+        vBox.getChildren().clear();
         Stage Lyly =new Stage();
         ShopLyly P = new ShopLyly();
         Button button1 = new Button("MAIN HOME");
@@ -104,27 +109,29 @@ private  Stage primaryStage;
             vBox.getChildren().add(button2);
             //
             row.getChildren().addAll();
-            Scene scene_H1 = new Scene(vBox, 550, 250);
+            Scene scene_H1 = new Scene(vBox, 550, 750);
             primaryStage.setTitle("All products");
             primaryStage.setScene(scene_H1);
             primaryStage.show();
         }
 
-            vBox.setAlignment(Pos.CENTER);
-            final Button button = new Button("Back");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent arg0) {
-                    button.getScene().setRoot(loadScreenOne(primaryStage));
-                }
-            });
-
-
-            Text text = new Text("Screen Two");
-            vBox.getChildren().addAll(text, button);
+//            vBox.setAlignment(Pos.CENTER);
+//            final Button button = new Button("Back");
+//            button.setOnAction(new EventHandler<ActionEvent>() {
+//
+//                @Override
+//                public void handle(ActionEvent arg0) {
+//                    button.getScene().setRoot(loadScreenOne(primaryStage));
+//                }
+//            });
+//
+//
+//            Text text = new Text("Screen Two");
+//            vBox.getChildren().addAll(text, button);
 
             return vBox;
         }
+
+
 //Met
     }
