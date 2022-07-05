@@ -204,19 +204,12 @@ public class Main extends Application {
             btnUpdate.setOnAction(e -> {
                 btnAdd.setVisible(false);
                 int id1 = Integer.parseInt(btnUpdate.getId());
-
                 tfName.setText("" + productsList.get(id1).getName());
-
                 tfImage.setText("" + productsList.get(id1).getImage());
-
                 tfPrice.setText("" + productsList.get(id1).getPrice());
-
                 tfSize.setText("" + productsList.get(id1).getSize());
-
                 tfColor.setText("" + productsList.get(id1).getColor());
-
                 tfQuantity.setText("" + productsList.get(id1).getQuantity());
-
                 tfcatego_id.setText("" + productsList.get(id1).getCatego_id());
                 var newbtnAdd = new Button("Update");
                 newbtnAdd.setPadding(new Insets(5, 15, 5, 15));
