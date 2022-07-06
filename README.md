@@ -1,8 +1,8 @@
 # JavafxProject Hồ Thị Phượng [Wedding dress shop]
 1. Stucture of project <br>
- ![image](https://user-images.githubusercontent.com/100773941/173478686-201b05c7-61aa-4b51-b70b-8b256226a53b.png)
+ ![image](https://user-images.githubusercontent.com/100773941/177660076-95ce3d23-7cd6-4749-9254-a99d2c1aece6.png)
 2. Entity Relationship Model of Database <br>
-![image](https://user-images.githubusercontent.com/100773941/173491190-1e902b66-88bc-4ec4-a7be-9898ec27e06e.png)
+![image](https://user-images.githubusercontent.com/100773941/177660221-cc5d9586-cd2f-4648-b963-ad862d333bbf.png)
 3. Link video demo <br>
 [[Video demo](https://drive.google.com/drive/folders/1rjHPNR6IXUeQ0gAXdgEtkv8d7rQJrp1S?usp=sharing)](https://drive.google.com/drive/folders/1rjHPNR6IXUeQ0gAXdgEtkv8d7rQJrp1S?usp=sharing)
 4. Completed functions of the project <br>
