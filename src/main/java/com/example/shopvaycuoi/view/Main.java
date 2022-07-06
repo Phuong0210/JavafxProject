@@ -319,6 +319,11 @@ public class Main extends Application {
             window.setTitle("All products");
             window.setScene(homepage);
             window.show();
+//            grid+=1;
+//            if(pgrid==2){
+//                pgrid==0
+//                pgrid+=1
+//            }
         }
     }
 }
