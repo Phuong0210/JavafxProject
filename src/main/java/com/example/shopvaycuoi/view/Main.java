@@ -267,63 +267,61 @@ public class Main extends Application {
 
     void showHome() {
 
-
-        homep.getChildren().clear();
+        grid.getChildren().clear();
+//        Button btnGoadmin = new Button("Go to admin");
+//        btnGoadmin.setOnAction(e -> {
+//            AdminShow();
+//        });
+//        grid.getChildren().addAll(btnGoadmin);
         ArrayList<Products> productsList = con.getProducts();
-        Button btnGoadmin = new Button("Go to admin");
-        btnGoadmin.setOnAction(e -> {
+        int ygrid =0;
+        int xgrid = 0;
+        for(int i = 0; i < productsList.size(); i++){
 
-            AdminShow();
-
-        });
-        homep.getChildren().addAll(btnGoadmin);
-        for (int i = 0; i < productsList.size(); i++) {
-            HBox row = new HBox();
-
-            homep.setSpacing(10);
-
-
+            VBox vBox = new VBox();
             Image image = new Image(productsList.get(i).getImage());
             ImageView imageView = new ImageView();
             imageView.setImage(image);
             imageView.setFitWidth(110);
             imageView.setFitHeight(110);
-            homep.getChildren().addAll(imageView);
-            // Label
+
+
             Label name = new Label("Name: " + productsList.get(i).getName());
             name.setStyle("-fx-font-size: 13px;-fx-font-weight: bold;" + "-fx-text-fill: #3b5998;" + "-fx-font-family: helvetica, arial, sans-serif");
             name.setPrefSize(400, 400);
-            homep.getChildren().addAll(name);
-            ///
+
             Label price = new Label("Price: " + productsList.get(i).getPrice());
             price.setStyle("-fx-font-size: 13px;-fx-font-weight: bold;" + "-fx-text-fill: #3b5998;" + "-fx-font-family: helvetica, arial, sans-serif");
             price.setPrefSize(400, 400);
-            homep.getChildren().addAll(price);
-            ///
+
             Label size = new Label("Size: " + productsList.get(i).getSize());
             size.setStyle("-fx-font-size: 11px;-fx-font-weight: bold;" + "-fx-text-fill: #5F9EA0;" + "-fx-font-family: helvetica, arial, sans-serif");
             size.setPrefSize(400, 400);
-            homep.getChildren().addAll(size);
-///
+
             Label color = new Label("Color: " + productsList.get(i).getColor());
             color.setStyle("-fx-font-size: 11px;-fx-font-weight: bold;" + "-fx-text-fill: #5F9EA0;" + "-fx-font-family: helvetica, arial, sans-serif");
             color.setPrefSize(400, 400);
-            homep.getChildren().addAll(color);
-            ///
+
             Button button2 = new Button("Đặt ngay");
             button2.setStyle("-fx-font-size: 13px;-fx-font-weight: bold;" + "-fx-text-fill: #3b5998;" + "-fx-font-family: helvetica, arial, sans-serif");
             button2.setPrefSize(100, 100);
-            homep.getChildren().add(button2);
-            //
-            row.getChildren().addAll();
-            window.setTitle("All products");
-            window.setScene(homepage);
-            window.show();
-//            grid+=1;
-//            if(pgrid==2){
-//                pgrid==0
-//                pgrid+=1
-//            }
+
+            name.setPadding(new Insets(2));
+            price.setPadding(new Insets(2));
+            size.setPadding(new Insets(2));
+            color.setPadding(new Insets(2));
+
+            vBox.getChildren().addAll(imageView,name,price, size,color,button2);
+            vBox.setSpacing(10);
+            grid.add((vBox), xgrid, ygrid);
+//            window.setTitle("All products");
+//            window.setScene(homepage);
+//            window.show();
+            xgrid +=1;
+            if( xgrid == 2){
+                xgrid = 0;
+                ygrid +=1;
+            }
         }
     }
 }
